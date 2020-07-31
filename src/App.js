@@ -16,15 +16,19 @@ const httpClient = (url, options = {}) => {
   return fetchUtils.fetchJson(url, options);
 };
 const dataProvider = jsonServerProvider(URL, httpClient);
-
+//const permissions = authProvider.getPermissions();
 const App = () => (
   <Admin
     dashboard={Dashboard}
-    authProvider={authProvider}
     dataProvider={dataProvider}
+    authProvider={authProvider}
   >
-    <Resource name="buyers" list={UserList}></Resource>
-    <Resource name="products" list={ProductList}></Resource>
+    {(permissions) => [
+      permissions === 'admin' ? (
+        <Resource name="buyers" list={UserList}></Resource>
+      ) : null,
+      <Resource name="products" list={ProductList}></Resource>,
+    ]}
   </Admin>
 );
 
