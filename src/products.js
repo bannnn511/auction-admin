@@ -1,6 +1,6 @@
-import * as React from "react";
-import { List, EditButton } from "react-admin";
-import inflection from "inflection";
+import * as React from 'react';
+import { List, EditButton } from 'react-admin';
+import inflection from 'inflection';
 import {
   Grid,
   Card,
@@ -8,22 +8,22 @@ import {
   CardContent,
   CardActions,
   Typography,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   root: {
-    marginTop: "1em",
+    marginTop: '1em',
   },
   media: {
     height: 140,
   },
   title: {
-    paddingBottom: "0.5em",
+    paddingBottom: '0.5em',
   },
   actionSpacer: {
-    display: "flex",
-    justifyContent: "space-around",
+    display: 'flex',
+    justifyContent: 'space-around',
   },
 });
 
@@ -35,10 +35,7 @@ const CategoryGrid = (props) => {
       {ids.map((id) => (
         <Grid key={id} xs={12} sm={6} md={4} lg={3} xl={2} item>
           <Card>
-            <CardMedia
-              image={`https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTdmiPPTUIqwFi0LNvibcr7IMyFHxsM2GnA5Q&usqp=CAU`}
-              className={classes.media}
-            />
+            <CardMedia image={data[id].imgUrl} className={classes.media} />
             <CardContent className={classes.title}>
               <Typography variant="h5" component="h2" align="center">
                 {inflection.humanize(data[id].productName)}
@@ -62,7 +59,7 @@ const CategoryGrid = (props) => {
 export const ProductList = (props) => (
   <List
     {...props}
-    sort={{ field: "name", order: "ASC" }}
+    sort={{ field: 'name', order: 'ASC' }}
     perPage={20}
     pagination={false}
     component="div"
