@@ -1,14 +1,28 @@
-// in src/App.js
-import * as React from "react"
-import { Admin, Resource } from "react-admin"
-import jsonServerProvider from "ra-data-json-server"
-import { UserList } from "./users"
+import * as React from 'react';
+import { fetchUtils, Admin, Resource } from 'react-admin';
+import jsonServerProvider from 'ra-data-json-server';
+import { UserList } from './users';
+import authProvider from './authProvider';
+import Dashboard from './Dashboard';
 
-const dataProvider = jsonServerProvider("http://localhost:4000/api/")
+const httpClient = (url, options = {}) => {
+  if (!options.headers) {
+    options.headers = new Headers({ Accept: 'application/json' });
+  }
+  const token = localStorage.getItem('token');
+  options.headers.set('Authorization', `Bearer ${token}`);
+  return fetchUtils.fetchJson(url, options);
+};
+const dataProvider = jsonServerProvider(URL, httpClient);
+
 const App = () => (
-  <Admin dataProvider={dataProvider}>
-    <Resource name="buyers" list={UserList}></Resource>
+  <Admin
+    dashboard={Dashboard}
+    authProvider={authProvider}
+    dataProvider={dataProvider}
+  >
+    <Resource name="buyers" list={UserList} />
   </Admin>
-)
+);
 
-export default App
+export default App;
