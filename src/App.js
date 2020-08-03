@@ -16,7 +16,7 @@ const httpClient = (url, options = {}) => {
   return fetchUtils.fetchJson(url, options);
 };
 const dataProvider = jsonServerProvider(URL, httpClient);
-//const permissions = authProvider.getPermissions();
+
 const App = () => (
   <Admin
     dashboard={Dashboard}
