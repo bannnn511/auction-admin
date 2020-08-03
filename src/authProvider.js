@@ -2,15 +2,15 @@ import { URL } from './constant';
 import decodeJwt from 'jwt-decode';
 
 // called when the user attempts to log in
-async function login({ email, password }) {
+async function login({ username, password }) {
   console.log('Login');
-  localStorage.setItem('email', email);
+  localStorage.setItem('email', username);
   localStorage.setItem('password', password);
   const url = URL + '/auth/login';
   console.log(url);
   const request = await new Request(url, {
     method: 'POST',
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ email: username, password }),
     headers: new Headers({ 'Content-Type': 'application/json' }),
   });
 
