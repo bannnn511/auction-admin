@@ -27,7 +27,7 @@ const App = () => (
       permissions === 'admin' ? (
         <Resource name="buyers" list={UserList}></Resource>
       ) : null,
-      <Resource name="products" list={ProductList}></Resource>,
+      <Resource name="auctions" list={ProductList}></Resource>,
     ]}
   </Admin>
 );

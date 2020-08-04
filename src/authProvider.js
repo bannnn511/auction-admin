@@ -4,6 +4,7 @@ import decodeJwt from 'jwt-decode';
 // called when the user attempts to log in
 async function login({ username, password }) {
   console.log('Login');
+  console.log(username, password);
   localStorage.setItem('email', username);
   localStorage.setItem('password', password);
   const url = URL + '/auth/login';
@@ -36,10 +37,10 @@ async function logout() {
   if (token) {
     if (!token) console.log('=======', decodeJwt(token));
     if (decodeJwt(token).exp < new Date().getTime() / 1000) {
-      const email = localStorage.getItem('email');
+      const username = localStorage.getItem('email');
       const password = localStorage.getItem('password');
-      console.log(email, password);
-      await login(email, password);
+      console.log('123456', username, password);
+      await login({ username, password });
       console.log('EXPIRED');
     }
     const url = URL + '/auth/logout';
@@ -61,12 +62,16 @@ async function logout() {
         return response.json();
       })
       .then(() => {
+        localStorage.removeItem('email');
+        localStorage.removeItem('password');
         localStorage.removeItem('token');
         localStorage.removeItem('permissions');
       });
   } else {
     localStorage.removeItem('email');
     localStorage.removeItem('password');
+    localStorage.removeItem('token');
+    localStorage.removeItem('permissions');
     return Promise.resolve();
   }
 }

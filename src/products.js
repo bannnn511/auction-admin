@@ -30,12 +30,13 @@ const useStyles = makeStyles({
 const CategoryGrid = (props) => {
   const classes = useStyles(props);
   const { data, ids } = props;
+  console.log(props);
   return ids ? (
     <Grid container spacing={2} className={classes.root}>
       {ids.map((id) => (
         <Grid key={id} xs={12} sm={6} md={4} lg={3} xl={2} item>
           <Card>
-            <CardMedia image={data[id].imgUrl} className={classes.media} />
+            <CardMedia image={data[id].imgURL} className={classes.media} />
             <CardContent className={classes.title}>
               <Typography variant="h5" component="h2" align="center">
                 {inflection.humanize(data[id].productName)}
